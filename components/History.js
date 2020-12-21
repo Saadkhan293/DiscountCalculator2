@@ -1,25 +1,40 @@
-import React,{Component} from 'react'
-import { StyleSheet, Text, View,TouchableOpacity,NavigatorIOS,Navigation,Button} from 'react-native';
+import React, { Component, useState } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, NavigatorIOS, Navigation, Button, FlatList, SafeAreaView } from 'react-native';
 import { DataTable } from 'react-native-paper';
- 
-function History({navigation,route}){
-        return(
-           <DataTable>
-               <DataTable.Header>
-                   <DataTable.Title>Product Price</DataTable.Title>
-                   <DataTable.Title>Discount</DataTable.Title>
-                   <DataTable.Title>Final Price</DataTable.Title>
-                   <DataTable.Title></DataTable.Title>
-               </DataTable.Header>
-               <DataTable.Row>
-                   <DataTable.Cell>222</DataTable.Cell>
-                   <DataTable.Cell>222</DataTable.Cell>
-                   <DataTable.Cell>222 </DataTable.Cell>
-                   <DataTable.Cell><Button title="Delete"></Button></DataTable.Cell>
-                   
-               </DataTable.Row>
-           </DataTable>
-        )
-    
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { ScrollView } from 'react-native-gesture-handler';
+
+function History({ navigation, route }) {
+    const value = route.params.param1;
+    const [cal, setData] = useState([]);
+    setData(value)
+   
+            
+
+    return (
+        <View style={styles.container}>
+        <ScrollView>
+           {cal.map(item =>(
+               <View key={item.key}
+               ><Text>{item.price}</Text></View>
+           ))}
+        </ScrollView>
+                
+
+               
+
+       
+
+        </View>
+    )
 }
-export default History
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})
+export default History;
