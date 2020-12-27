@@ -10,9 +10,9 @@ function Discount({ navigation, route }) {
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [finalPrice, setFinalPrice] = useState(0);
-  const [disableButton, setDisable] = useState(true);
-  const [data, setData] = useState([
-  ]);
+  const [key,setKey] =useState(0);
+  const [data, setData] = useState([]);
+  //for the header button on the discount screen
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -26,18 +26,22 @@ function Discount({ navigation, route }) {
       ),
     })
   })
+  //function for the calculation Button
   calculations = () => {
     var value = price - price * discount / 100;
     setFinalPrice(value);
+    setKey(key+1)
 
 
   }
+  //Function for the save Button
   save = () => {
-    setData( {
+    setData([...data, {
       price: price,
       discount: discount,
-      finalPrice: finalPrice
-    })
+      finalPrice: finalPrice,
+      key:key,
+    },])
     console.log(data)
   }
 
